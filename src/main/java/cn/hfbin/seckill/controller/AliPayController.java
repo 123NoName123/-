@@ -64,7 +64,7 @@ public class AliPayController {
         httpResponse.getWriter().flush();
         httpResponse.getWriter().close();
     }
-    @PostMapping("/notify")  // 注意这里必须是POST接口
+    @PostMapping("/notify")  // 注意这里必须是POST接口，支付宝异步通知是最大努力通知，要做好幂等性判断，在TODO最好给订单加个取消的状态，这样就具备天然幂等性
     public String payNotify(HttpServletRequest request) throws Exception {
         if (request.getParameter("trade_status").equals("TRADE_SUCCESS")) {
             System.out.println("=========支付宝异步回调========");
